@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+{% load static %}
+div.polaroid {
+  width: 400px;
+  height: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  background: DarkSlateGrey;
+}
+
+h1 {
+  color: Purple;
+  text-align: center;
+  text-decoration: none;
+  font-family:  ;
+}
+
+p {
+  color: white;
+  font-size: 35px;
+  font-family: "Arial";
+}
+
+p:hover{
+  color: black;
+  background-color: white;
+  font-size: 35px;
+  font-family: "Arial";
+  cursor: pointer;
+}
+
+img {
+  border-radius: 45%;
+  width: 150px;
+  height: 150px;
+  padding-top: 25px;
+  transition: width 0.5s, height 0.5s;
+ }
+
+ img:hover{
+   border-radius: 45%;
+   width: 200px;
+   height: 200px;
+   transition-property: width , height;
+   padding-top: 25px;
+  }
+
+ .btn-group button {
+   background-color: #4CAF50; /* Green background */
+   border: 1px solid green; /* Green border */
+   color: white; /* White text */
+   padding: 15px 50px; /* Some padding */
+   cursor: pointer; /* Pointer/hand icon */
+   float: center;
+ }
+
+ /* Clear floats (clearfix hack) */
+ .btn-group:after {
+   content: "";
+   clear: both;
+   display: table;
+ }
+ .btn-group button:not(:last-child) {
+   border-right: none; /* Prevent double borders */
+ }
+
+ /* Add a background color on hover */
+ .btn-group button:hover {
+   background-color: black;
+ }
+
+
+div.container {
+  padding: 6.50px;
+  font-size: 25px;
+}
+
+span {
+  font-size: 20px;
+  cursor: pointer;
+  style: hidden;
+}
+
+
+.facebook {
+  background:white;
+  width: 20px;
+}
+
+.twitter {
+  background: dodgerblue;
+  width: 20px;
+}
+
+.google {
+  background:white;
+  width: 20px;
+}
+
+.instagram {
+  background: white;
+  width: 20px;
+}
+
+.skype {
+  background: white;
+  width: 20px;
+}
+
+.content {
+  margin-left: 155px;
+  font-size: 100px;
+}
+
+.overlay {
+  height: 85%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 1.5;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 10%;
+  width: 20%;
+  text-align: left;
+  margin-top: 25px;
+}
+
+.overlay a {
+  font-size: 18px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  text-align: center;
+  padding: 26px;
+  transition: all 0.3s ease;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: white;
+  background-color: gold;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  font-size:25px;
+  background-color: white;
+  color: black;
+}
+
+@media screen and (max-height: 200px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
+
+</style>
+</head>
+<body>
+
+<h1>User Information</h1>
+
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+      <a href="#" class="facebook"><i class="fa fa-facebook" style="font-size:30px;color:blue;"></i></a>
+      <a href="#" class="instagram"><i class="fa fa-instagram" style="font-size:30px;color:red;"></i></a>
+      <a href="#" class="twitter"><i class="fa fa-twitter" style="font-size:30px;color:white;"></i></a>
+      <a href="#" class="google"><i class="fa fa-google" style="font-size:30px;color:DodgerBlue;"></i></a>
+      <a href="#" class="skype"><i class="fa fa-skype" style="font-size:30px;color:cyan;"></i></a>
+  </div>
+</div>
+<div style="background-color:white; width:5%; top:200px; height:400px; position:absolute;" onmouseover="openNav()">
+<h1 style="color:white; text-shadow: 0px 0px 0px ;">Hi</h1>
+</div>
+<script>
+function openNav() {
+  document.getElementById("myNav").style.width = "5%";
+}
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+
+function function1() {
+    window.location.href = "Subscription.html";
+  }
+function function2() {
+      location.href = "password.html";
+    }
+function function3() {
+        location.href = "contact.html";
+    }
+
+</script>
+
+<center>
+<div class="polaroid">
+  <img src="/media/avatar.jpg" alt="Subbaraj">
+  <div class="container">
+    <table>
+    <tr><p>User1</p></tr>
+    <tr><p>iamuser1@gmail.com</p></tr>
+    <tr><p>620-2879-3425</p></tr>
+    </table>
+  </div>
+</div>
+<br/><br/>
+<div class="btn-group">
+  <button id="Subscription" onclick=function1()>Manage Subscription</button>
+  <button id="Password" onclick=function2()>Change Password</button>
+  <button id="Contact" onclick=function3()>Contact Us</button>
+</div>
+</center>
+</body>
+</html>
+
+<!--
+<button id="myButton">Home</button>
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "www.yoursite.com";
+    };
+</script>
+ -->

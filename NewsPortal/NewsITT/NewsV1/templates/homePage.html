@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href = "{% static 'css/homePageCSS.css' %}">
+    <script type="text/javascript">
+      var pos=0;
+      var news={}
+      var snews={}
+      flag=0
+      function next(){
+        if(pos<=18 && flag==0){
+        document.getElementById("urltoimage").src=""+news[pos]["urlToImage"]
+        document.getElementById("content").innerHTML= ""+news[pos]["content"]
+        document.getElementById("title").innerHTML= ""+news[pos]["title"]
+        document.getElementById("description").innerHTML= ""+news[pos]["description"]
+        var res = news[pos]["publishedAt"].replace("T"," ")
+        res =res.replace("Z","")
+        res=res.replace("2019-","")
+        res =res.replace("11-","November ")
+        document.getElementById("date").innerHTML= "Date:"+res
+        pos=pos+1
+      }
+      if(pos<=18 && flag ==1){
+        document.getElementById("urltoimage").src=""+snews[pos]["urlToImage"]
+        document.getElementById("content").innerHTML= ""+snews[pos]["content"]
+        document.getElementById("title").innerHTML= ""+snews[pos]["title"]
+        document.getElementById("description").innerHTML= ""+snews[pos]["description"]
+        document.getElementById("date").innerHTML= "Date:"+snews[pos]["publishedAt"]
+        pos=pos+1
+      }
+      }
+      function prev(){
+        if(pos>0 && flag==0){
+        document.getElementById("urltoimage").src=""+""+news[pos]["urlToImage"]
+        document.getElementById("content").innerHTML= ""+news[pos]["content"]
+        document.getElementById("title").innerHTML= ""+news[pos]["title"]
+        document.getElementById("description").innerHTML= ""+news[pos]["description"]
+        document.getElementById("date").innerHTML= "Date:"+news[pos]["publishedAt"]
+        pos=pos-1
+      }
+      if(pos>0 && flag ==1){
+        document.getElementById("urltoimage").src=""+""+snews[pos]["urlToImage"]
+        document.getElementById("content").innerHTML= ""+snews[pos]["content"]
+        document.getElementById("title").innerHTML= ""+snews[pos]["title"]
+        document.getElementById("description").innerHTML= ""+snews[pos]["description"]
+        document.getElementById("date").innerHTML= "Date:"+snews[pos]["publishedAt"]
+        pos=pos-1
+      }
+      }
+      function toggleSidebar(){
+        document.getElementById('sidebar').classList.toggle('active');
+      }
+      var searchnewsDjango="{{searchnews}}"
+      var searchnewsCopy = searchnewsDjango.replace(/&quot;/g, "\"");
+      alert(""+searchnewsCopy)
+      function search2(){
+        $('#cover-spin').show(0)
+      }
+      function newsRetrieval(){
+        try{
+        var newsDjango="{{headlines}}"
+        var newsCopy = newsDjango.replace(/&quot;/g, "\"");
+        var newsCopy2="";
+        for(var i=0;i<newsCopy.length;i++){
+          if(!(newsCopy[i]=='\n' || newsCopy[i]=='\r'))
+            newsCopy2 +=newsCopy[i];
+        }
+        news = JSON.parse(newsCopy2)
+        const dict_keys  =Object.keys(news)
+      }
+      catch(err){
+        var x=1
+      }
+    }
+    function user(){
+      window.location.href='User.html'
+    }
+    function display(){
+      try{
+      flag=1
+      var searchnewsCopy2="";
+      for(var i=0;i<searchnewsCopy.length;i++){
+        if(!(searchnewsCopy[i]=='\n' || searchnewsCopy[i]=='\r'))
+          searchnewsCopy2 +=searchnewsCopy[i];
+      }
+      snews = JSON.parse(searchnewsCopy2)
+      console.log(snews)
+      document.getElementById("cover-spin").style.display="inline";
+    }
+    catch(err){
+      var x=1
+    }
+    }
+    </script>
+  </head>
+  <body>
+    <div id = "sidebar">
+      <div class = "toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul>
+          <li onclick="newsRetrieval()" style="cursor:pointer;">Home</li>
+          <li style="cursor:pointer;" onclick="user()">About</li>
+          <li style="cursor:pointer;">Contact</li>
+      </ul>
+    </div>
+    <div id="cover-spin"></div>
+    <form align="center" action="" onsubmit="search2()" method="post">{% csrf_token %}
+      <label style="left:50px;"><strong>  &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;News Portal</strong></label>
+      <input type="text" id="search" value="" name="search" placeholder="Search for more Interesting topics...">
+      <!--<input type="submit" name="submit" onclick="search2()" value="Thope">-->
+    </form>
+    <button type="button" style="background-color:white; color: white;width:100%;" value="button" onclick="display()" name="button123">qwerty</button><br>
+    <!--<button type="button" style="background-color:red;" value="button" onclick="newsRetrieval()" name="button12">Subbaraju</button>-->
+    <div class="wrapper">
+        <button class="button" onclick="prev()">
+          <img src="/media/left-arrow.png" alt="">
+        </button>
+    </div>
+    <div class="wrapper1">
+        <button class="button1" onclick="next()">
+          <img src="/media/right.png" alt="">
+        </button>
+    </div>
+    <table align="center" style="width:80%; margin-left:10%; margin-top:30px">
+  <tr bgcolor="">
+    <td height ="280" align="center"><img id="urltoimage" src="" style="object-fit:cover;"></td>
+  </tr>
+  <tr bgcolor="">
+    <td height = "40%">
+      <h2 id="title" style="text-align:center;"></h2><br><br>
+      <p id="content" style="align:center;text-align:center;"></p><br><br>
+      <p id ="description" style="text-align:center;"></p><br><br>
+      <label id="date" style="float:right;"></label>
+    </td>
+  </tr>
+</table>
+  </body>
+</html>
