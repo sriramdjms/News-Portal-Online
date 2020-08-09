@@ -1,2 +1,6 @@
 # NewsPortalOnline
-Django Framework,Python, HTML,CSS,Javascript
+# Django Framework
+# Python
+# HTML
+# CSS
+# Javascript
